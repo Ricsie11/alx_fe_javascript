@@ -1,0 +1,13 @@
+body{
+    background-color: aquamarine;
+    display: block;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+#quoteDisplay{
+    margin:auto;
+    width: 10%;
+    padding: 20px;
+    border: 2px solid rgb(22, 177, 16);
+    background-color: white;
+}
