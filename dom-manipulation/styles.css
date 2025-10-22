@@ -1,6 +1,6 @@
 body{
     background-color: aquamarine;
-    display: block;
+    display: flexbox;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
 }
@@ -10,4 +10,30 @@ body{
     padding: 20px;
     border: 2px solid rgb(22, 177, 16);
     background-color: white;
+    margin-bottom: 1em;
+}
+#newQuote{
+    padding: 10px 20px;
+    background-color: coral;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+#newQuote:hover{
+    color:rgb(26, 179, 6)
+}
+.men{
+    margin: auto;
+    width: 20%;
+    padding: 10px;
+    border: 2px solid rgb(190, 86, 16);
+    background-color: white;
+}
+#newQuoteText{
+    margin-bottom: 1rem;
+}
+#addQuoteButton{
+    margin-right: 1rem;
+    margin-top: 1em;
+;
 }

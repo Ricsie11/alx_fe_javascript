@@ -225,4 +225,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
+
+  //   Add new quote function
+  function addQuote() {
+    const textInput = document.getElementById("newQuoteText");
+    const categoryInput = document.getElementById("newQuoteCategory");
+
+    const newText = textInput.value.trim();
+    const newCategory = categoryInput.value.trim();
+
+    // Validate that inputs are not empty
+    if (!newText || !newCategory) {
+      alert("Please fill in both fields.");
+      return;
+    }
+    // add new quote to array
+    quotes.push({ text: newText, category: newCategory });
+
+    //   clear inputs fields
+    textInput.value = "";
+    categoryInput.value = "";
+
+    alert("New quote added successfully!");
+  }
+
+  // Step 6: connect the Add button
+//   document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 });
