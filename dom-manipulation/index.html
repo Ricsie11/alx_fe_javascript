@@ -11,12 +11,14 @@
       <h1>Dynamic Quote Generator</h1>
       <div id="quoteDisplay"></div>
 
+      <!-- Buttons -->
       <div class="mint">
         <button id="newQuote">Show New Quote</button>
         <button id="exportQuotes">Export Quotes</button>
         <input type="file" id="importQuotes" accept=".json" />
       </div>
 
+      <!-- Add Quote Form -->
       <div class="quote-form">
         <input type="text" id="newQuoteText" placeholder="Enter a new quote" />
         <input
@@ -25,6 +27,14 @@
           placeholder="Enter quote category"
         />
         <button id="addQuoteBtn">Add Quote</button>
+      </div>
+
+      <!-- Category Filter Dropdown -->
+      <div class="filter-section">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+        </select>
       </div>
     </div>
     <script src="script.js"></script>

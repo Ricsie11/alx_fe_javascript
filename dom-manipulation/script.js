@@ -225,41 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sessionStorage.setItem("lastViewedQuote", randomIndex);
   }
+
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
-
-  // // Form for user to create their own Quote
-  // function createAddQuoteForm() {
-  //   const formContainer = document.createElement("div");
-
-  //   // Create input for quote text
-  //   const textInput = document.createElement("input");
-  //   textInput.id = "newQuoteText";
-  //   textInput.type = "text";
-  //   textInput.placeholder = "Enter a new quote";
-
-  //   // Create input for quote category
-  //   const quoteCategory = document.createElement("input");
-  //   quoteCategory.id = "newQuoteCategory";
-  //   quoteCategory.type = "text";
-  //   quoteCategory.placeholder = "Enter quote category";
-
-  //   // Create button for adding quote
-  //   const addButton = document.createElement("button");
-  //   addButton.id = "addQuoteBtn";
-  //   addButton.textContent = "add quote";
-
-  //   // Add everything to container
-  //   formContainer.appendChild(textInput);
-  //   formContainer.appendChild(quoteCategory);
-  //   formContainer.appendChild(addButton);
-
-  //   document.body.appendChild(formContainer);
-
-  //   formContainer.classList.add("quote-form");
-  // }
-
-  // createAddQuoteForm();
 
   // Add new quote
   function addQuote() {
@@ -289,9 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
   importInput.type = "file";
   importInput.accept = ".json";
   importInput.addEventListener("change", importFromJsonFile);
-
-  // document.body.appendChild(exportButton);
-  // document.body.appendChild(importInput);
 
   // Export quotes to JSON
   function exportToJsonFile() {
@@ -323,4 +288,46 @@ document.addEventListener("DOMContentLoaded", () => {
     quoteDisplay.innerHTML = `<p>${quote.text}</p><small>${quote.category}</small>`;
   }
   document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+
+  // Implementing Filtering Logic
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  // Populate category dropdown
+  function populateCategories() {
+    const categories = [...new Set(quotes.map((q) => q.category))];
+    categoryFilter.innerHTML = `<option value="all">All Categories</option>`;
+    categories.forEach((cat) => {
+      const option = document.createElement("option");
+      option.value = cat;
+      option.textContent = cat;
+      categoryFilter.appendChild(option);
+    });
+  }
+
+  // Initialize
+  populateCategories();
+
+  // Filter quotes by selected category
+  function filterQuotes() {
+    const selectedCategory = categoryFilter.value;
+
+    // Get filtered quotes
+    const filteredQuotes =
+      selectedCategory === "all"
+        ? quotes
+        : quotes.filter((q) => q.category === selectedCategory);
+
+    if (filteredQuotes.length === 0) {
+      quoteDisplay.innerHTML = "<p>No quotes found in this category.</p>";
+      return;
+    }
+
+    // Show a random quote from the filtered list
+    const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
+    const quote = filteredQuotes[randomIndex];
+    quoteDisplay.innerHTML = `<p>${quote.text}</p><small>${quote.category}</small>`;
+  }
+
+  // When user changes category
+  categoryFilter.addEventListener("change", filterQuotes);
 });
