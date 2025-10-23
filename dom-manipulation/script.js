@@ -228,38 +228,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
 
-  // Form for user to create their own Quote
-  function createAddQuoteForm() {
-    const formContainer = document.createElement("div");
+  // // Form for user to create their own Quote
+  // function createAddQuoteForm() {
+  //   const formContainer = document.createElement("div");
 
-    // Create input for quote text
-    const textInput = document.createElement("input");
-    textInput.id = "newQuoteText";
-    textInput.type = "text";
-    textInput.placeholder = "Enter a new quote";
+  //   // Create input for quote text
+  //   const textInput = document.createElement("input");
+  //   textInput.id = "newQuoteText";
+  //   textInput.type = "text";
+  //   textInput.placeholder = "Enter a new quote";
 
-    // Create input for quote category
-    const quoteCategory = document.createElement("input");
-    quoteCategory.id = "newQuoteCategory";
-    quoteCategory.type = "text";
-    quoteCategory.placeholder = "Enter quote category";
+  //   // Create input for quote category
+  //   const quoteCategory = document.createElement("input");
+  //   quoteCategory.id = "newQuoteCategory";
+  //   quoteCategory.type = "text";
+  //   quoteCategory.placeholder = "Enter quote category";
 
-    // Create button for adding quote
-    const addButton = document.createElement("button");
-    addButton.id = "addQuoteBtn";
-    addButton.textContent = "add quote";
+  //   // Create button for adding quote
+  //   const addButton = document.createElement("button");
+  //   addButton.id = "addQuoteBtn";
+  //   addButton.textContent = "add quote";
 
-    // Add everything to container
-    formContainer.appendChild(textInput);
-    formContainer.appendChild(quoteCategory);
-    formContainer.appendChild(addButton);
+  //   // Add everything to container
+  //   formContainer.appendChild(textInput);
+  //   formContainer.appendChild(quoteCategory);
+  //   formContainer.appendChild(addButton);
 
-    document.body.appendChild(formContainer);
+  //   document.body.appendChild(formContainer);
 
-    formContainer.classList.add("quote-form");
-  }
+  //   formContainer.classList.add("quote-form");
+  // }
 
-  createAddQuoteForm();
+  // createAddQuoteForm();
 
   // Add new quote
   function addQuote() {
@@ -290,10 +290,10 @@ document.addEventListener("DOMContentLoaded", () => {
   importInput.accept = ".json";
   importInput.addEventListener("change", importFromJsonFile);
 
-  document.body.appendChild(exportButton);
-  document.body.appendChild(importInput);
+  // document.body.appendChild(exportButton);
+  // document.body.appendChild(importInput);
 
-  // Export quotes to JSON file
+  // Export quotes to JSON
   function exportToJsonFile() {
     const dataStr = JSON.stringify(quotes, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.click();
   }
 
-  // Import quotes from JSON file
+  // Import quotes from JSON
   function importFromJsonFile(event) {
     const fileReader = new FileReader();
     fileReader.onload = function (event) {
@@ -322,6 +322,5 @@ document.addEventListener("DOMContentLoaded", () => {
     const quote = quotes[lastViewed];
     quoteDisplay.innerHTML = `<p>${quote.text}</p><small>${quote.category}</small>`;
   }
-
   document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 });
