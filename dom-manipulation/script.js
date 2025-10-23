@@ -226,29 +226,41 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
 
-  //   Add new quote function
-  function addQuote() {
-    const textInput = document.getElementById("newQuoteText");
-    const categoryInput = document.getElementById("newQuoteCategory");
 
-    const newText = textInput.value.trim();
-    const newCategory = categoryInput.value.trim();
 
-    // Validate that inputs are not empty
-    if (!newText || !newCategory) {
-      alert("Please fill in both fields.");
-      return;
-    }
-    // add new quote to array
-    quotes.push({ text: newText, category: newCategory });
 
-    //   clear inputs fields
-    textInput.value = "";
-    categoryInput.value = "";
+  // Form for user to create their own Quote
+  function createAddQuoteForm() {
+    const formContainer = document.createElement("div");
 
-    alert("New quote added successfully!");
+    // Create input for quote text
+    const textInput = document.createElement("input");
+    textInput.id = "newQuoteText";
+    textInput.type = "text";
+    textInput.placeholder = "Enter a new quote";
+
+    // Create input for quote category
+    const quoteCategory = document.createElement("input");
+    quoteCategory.id = "newQuoteCategory";
+    quoteCategory.type = "text";
+    quoteCategory.placeholder = "Enter quote category";
+
+    // Create button for adding quote
+    const addButton = document.createElement("button");
+    addButton.id = "addQuoteBtn";
+    addButton.textContent = "add quote";
+
+    // Add everything to container
+    formContainer.appendChild(textInput);
+    formContainer.appendChild(quoteCategory);
+    formContainer.appendChild(addButton);
+
+    document.body.appendChild(formContainer);
+    
+    formContainer.classList.add("quote-form");
+  
   }
 
-  // Step 6: connect the Add button
-//   document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+  createAddQuoteForm();
+  document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
 });
