@@ -379,7 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 // 🔹 Sync local data with server (server takes precedence)
-async function syncWithServer() {
+async function syncQuotes() {
   try {
     // 1️⃣ Fetch simulated server quotes
     const serverQuotes = await fetchQuotesFromServer();
@@ -412,5 +412,5 @@ async function syncWithServer() {
 }
 
   // 🔹 Auto-sync every 20 seconds
-  setInterval(syncWithServer, 20000);
+  setInterval(syncQuotes, 20000);
 });
