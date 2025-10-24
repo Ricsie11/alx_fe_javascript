@@ -378,25 +378,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }));
   }
 
-  // 🔹 Sync local data with server (server takes precedence)
-  async function syncWithServer() {
-    try {
-      const serverQuotes = await fetchQuotesFromServer();
+// 🔹 Sync local data with server (server takes precedence)
+async function syncWithServer() {
+  try {
+    // 1️⃣ Fetch simulated server quotes
+    const serverQuotes = await fetchQuotesFromServer();
 
-      // Combine & remove duplicates (server first)
-      const combined = [...serverQuotes, ...quotes];
-      const unique = Array.from(
-        new Map(combined.map((q) => [q.text, q])).values()
-      );
+    // 2️⃣ Merge server + local quotes (server first)
+    const combined = [...serverQuotes, ...quotes];
+    const unique = Array.from(new Map(combined.map((q) => [q.text, q])).values());
 
-      quotes = unique;
-      saveQuotes();
-      populateCategories();
-      alert("🔁 Synced with server successfully!");
-    } catch (error) {
-      alert("⚠️ Failed to sync with server.");
-    }
+    quotes = unique;
+    saveQuotes();
+    populateCategories();
+
+    // 3️⃣ 🔹 Simulate sending local data back to server
+    await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quotes: quotes,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+
+    alert("🔁 Synced with server successfully (data sent & updated)!");
+  } catch (error) {
+    alert("⚠️ Failed to sync with server.");
+    console.error(error);
   }
+}
 
   // 🔹 Auto-sync every 20 seconds
   setInterval(syncWithServer, 20000);
