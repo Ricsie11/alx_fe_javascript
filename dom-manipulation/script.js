@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveQuotes() {
     localStorage.setItem("quotes", JSON.stringify(quotes));
   }
-  
+
   // Function to show a random quote
   function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
   categoryFilter.addEventListener("change", filterQuotes);
 
   // 🔹 Simulate fetching quotes from a server
-  async function fetchServerQuotes() {
+  async function fetchQuotesFromServer() {
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/posts?_limit=3"
     );
@@ -381,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔹 Sync local data with server (server takes precedence)
   async function syncWithServer() {
     try {
-      const serverQuotes = await fetchServerQuotes();
+      const serverQuotes = await fetchQuotesFromServer();
 
       // Combine & remove duplicates (server first)
       const combined = [...serverQuotes, ...quotes];
