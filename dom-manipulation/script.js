@@ -404,7 +404,7 @@ async function syncQuotes() {
       }),
     });
 
-    alert("🔁 Synced with server successfully (data sent & updated)!");
+    alert("🔁 Quotes synced with server!");
   } catch (error) {
     alert("⚠️ Failed to sync with server.");
     console.error(error);
