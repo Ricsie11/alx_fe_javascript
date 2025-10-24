@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Category Filter Dropdown -->
+    <div class="filter-section">
+      <label for="categoryFilter">Filter by Category:</label>
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+      </select>
+    </div>
     <div class="foine">
       <h1>Dynamic Quote Generator</h1>
       <div id="quoteDisplay"></div>
@@ -27,14 +34,6 @@
           placeholder="Enter quote category"
         />
         <button id="addQuoteBtn">Add Quote</button>
-      </div>
-
-      <!-- Category Filter Dropdown -->
-      <div class="filter-section">
-        <label for="categoryFilter">Filter by Category:</label>
-        <select id="categoryFilter">
-          <option value="all">All Categories</option>
-        </select>
       </div>
     </div>
     <script src="script.js"></script>

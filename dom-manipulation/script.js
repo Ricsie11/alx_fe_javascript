@@ -226,8 +226,41 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("lastViewedQuote", randomIndex);
   }
 
+  
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
+
+  function createAddQuoteForm() {
+    const formContainer = document.createElement("div");
+    formContainer.id = "quoteForm";
+
+    // Input for quote text
+    const textInput = document.createElement("input");
+    textInput.id = "newQuoteText";
+    textInput.type = "text";
+    textInput.placeholder = "Enter a new quote";
+
+    // Input for quote category
+    const categoryInput = document.createElement("input");
+    categoryInput.id = "newQuoteCategory";
+    categoryInput.type = "text";
+    categoryInput.placeholder = "Enter quote category";
+
+    // Add button
+    const addButton = document.createElement("button");
+    addButton.id = "addQuoteBtn";
+    addButton.textContent = "Add Quote";
+
+    // Add to container
+    formContainer.appendChild(textInput);
+    formContainer.appendChild(categoryInput);
+    formContainer.appendChild(addButton);
+
+    document.body.appendChild(formContainer);
+  }
+  document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+
+
 
   // Add new quote
   function addQuote() {
