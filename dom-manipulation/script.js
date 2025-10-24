@@ -217,6 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const quoteDisplay = document.getElementById("quoteDisplay");
   const newQuoteButton = document.getElementById("newQuote");
 
+  // 🔹 Save quotes to localStorage
+  function saveQuotes() {
+    localStorage.setItem("quotes", JSON.stringify(quotes));
+  }
+  
   // Function to show a random quote
   function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -226,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("lastViewedQuote", randomIndex);
   }
 
-  
   // Show random quote when user clicks button
   newQuoteButton.addEventListener("click", showRandomQuote);
 
@@ -259,8 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(formContainer);
   }
   document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
-
-
 
   // Add new quote
   function addQuote() {
@@ -363,4 +365,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // When user changes category
   categoryFilter.addEventListener("change", filterQuotes);
+
+  // 🔹 Simulate fetching quotes from a server
+  async function fetchServerQuotes() {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts?_limit=3"
+    );
+    const data = await response.json();
+    return data.map((item) => ({
+      text: item.title,
+      category: "Server",
+    }));
+  }
+
+  // 🔹 Sync local data with server (server takes precedence)
+  async function syncWithServer() {
+    try {
+      const serverQuotes = await fetchServerQuotes();
+
+      // Combine & remove duplicates (server first)
+      const combined = [...serverQuotes, ...quotes];
+      const unique = Array.from(
+        new Map(combined.map((q) => [q.text, q])).values()
+      );
+
+      quotes = unique;
+      saveQuotes();
+      populateCategories();
+      alert("🔁 Synced with server successfully!");
+    } catch (error) {
+      alert("⚠️ Failed to sync with server.");
+    }
+  }
+
+  // 🔹 Auto-sync every 20 seconds
+  setInterval(syncWithServer, 20000);
 });
